@@ -23,10 +23,12 @@ pub use prometheus::Protocol;
 
 mod prometheus;
 mod proxy_get_request;
+mod set_header_extensions;
 
 use crate::extensions::prometheus::RpcMetrics;
 use crate::extensions::server::prometheus::PrometheusService;
 use proxy_get_request::{ProxyGetRequestLayer, ProxyGetRequestMethod};
+use set_header_extensions::SetHeaderExtensionsLayer;
 
 pub struct SubwayServerBuilder {
     pub config: ServerConfig,
@@ -66,10 +68,16 @@ pub struct ServerConfig {
     pub request_timeout_seconds: u64,
     #[serde(default)]
     pub cors: Option<ItemOrList<String>>,
+    #[serde(default = "default_inherit_headers")]
+    pub inherit_headers: bool,
 }
 
 fn default_request_timeout_seconds() -> u64 {
     120
+}
+
+fn default_inherit_headers() -> bool {
+    false
 }
 
 #[async_trait]
@@ -127,7 +135,7 @@ impl SubwayServerBuilder {
                         .collect(),
                 )
                 .expect("Invalid health config"),
-            );
+            ).option_layer(config.inherit_headers.then(|| SetHeaderExtensionsLayer::new()));
 
         let batch_request_config = match config.max_batch_size {
             Some(0) => BatchRequestConfig::Disabled,

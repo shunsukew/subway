@@ -58,6 +58,7 @@ async fn merge_subscription_works() {
                 request_timeout_seconds: 120,
                 http_methods: Vec::new(),
                 cors: None,
+                inherit_headers: false,
             }),
             merge_subscription: Some(MergeSubscriptionConfig {
                 keep_alive_seconds: Some(1),

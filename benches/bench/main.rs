@@ -226,6 +226,7 @@ fn config() -> Config {
                 request_timeout_seconds: 120,
                 http_methods: Vec::new(),
                 cors: None,
+                inherit_headers: false,
             }),
             substrate_api: Some(SubstrateApiConfig {
                 stale_timeout_seconds: 5_000,

@@ -263,6 +263,7 @@ mod tests {
                     request_timeout_seconds: request_timeout_seconds.unwrap_or(10),
                     http_methods: Vec::new(),
                     cors: None,
+                    inherit_headers: false,
                 }),
                 ..Default::default()
             },
