@@ -31,6 +31,7 @@ pub async fn create_method_middleware(
         "inject_params" => inject_params::InjectParamsMiddleware::build(method, extensions).await,
         "delay" => delay::DelayMiddleware::build(method, extensions).await,
         "validate" => validate::ValidateMiddleware::build(method, extensions).await,
+        "logging" => logging::LoggingMiddleware::build(method, extensions).await,
         #[cfg(test)]
         "crazy" => testing::CrazyMiddleware::build(method, extensions).await,
         _ => panic!("Unknown method middleware: {}", name),

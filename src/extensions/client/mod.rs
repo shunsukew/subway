@@ -134,6 +134,7 @@ impl Extension for Client {
     type Config = ClientConfig;
 
     async fn from_config(config: &Self::Config, _registry: &ExtensionRegistry) -> Result<Self, anyhow::Error> {
+        config.validate(&())?;
         if config.shuffle_endpoints {
             let mut endpoints = config.endpoints.clone();
             endpoints.shuffle(&mut thread_rng());

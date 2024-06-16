@@ -16,9 +16,15 @@ extensions:
     max_connections: 2000
     max_batch_size: 10
     cors: all
+  logging:
+    format: json
+    output:
+      type: file
+      path: /dev/stdout
 
 middlewares:
   methods:
+    - logging
     - response
     - block_tag
     - cache
