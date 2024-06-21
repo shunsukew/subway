@@ -16,7 +16,9 @@ extensions:
     max_connections: 2000
     max_batch_size: 10
     cors: all
-
+    logging:
+      http: true
+      rpc: true
 middlewares:
   methods:
     - response

@@ -3419,6 +3419,7 @@ dependencies = [
  "opentelemetry-datadog",
  "opentelemetry-jaeger",
  "opentelemetry_sdk",
+ "pin-project",
  "pprof",
  "rand 0.8.5",
  "regex",

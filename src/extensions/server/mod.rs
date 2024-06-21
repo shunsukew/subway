@@ -19,14 +19,13 @@ use tower_http::cors::{AllowOrigin, CorsLayer};
 
 use super::{Extension, ExtensionRegistry};
 use crate::extensions::rate_limit::{MethodWeights, RateLimitBuilder, XFF};
-pub use prometheus::Protocol;
+pub use layer::rpc::prometheus::Protocol;
 
-mod prometheus;
-mod proxy_get_request;
+mod layer;
 
 use crate::extensions::prometheus::RpcMetrics;
-use crate::extensions::server::prometheus::PrometheusService;
-use proxy_get_request::{ProxyGetRequestLayer, ProxyGetRequestMethod};
+use layer::rpc::prometheus::PrometheusService;
+use layer::http::proxy_get_request::{ProxyGetRequestLayer, ProxyGetRequestMethod};
 
 pub struct SubwayServerBuilder {
     pub config: ServerConfig,
